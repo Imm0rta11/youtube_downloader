@@ -16,11 +16,13 @@ derectory_save = None
 
 
 def Download():
-    text = ui.textEdit.toPlainText()
-    yt = pytube.YouTube(text)
-    stream = yt.streams.get_highest_resolution()
-    stream.download(derectory_save)
-
+    try:
+        text = ui.textEdit.toPlainText()
+        yt = pytube.YouTube(text)
+        stream = yt.streams.get_highest_resolution()
+        stream.download(derectory_save)
+    except pytube.exceptions.RegexMatchError:
+        ui.textEdit.setText('Error')
 
 def Select_derectory():
     global derectory_save
